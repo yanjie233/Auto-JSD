@@ -3,8 +3,10 @@ const https = require('https');
 // CDN 列表，您可以在这里手动更新
 const CDN_URLS = [
   'https://cdn.jsdelivr.net',
-  'https://fastly.jsdelivr.net',
-  'https://gcore.jsdelivr.net',
+  'https://cdn.statically.io',
+  'https://jsd.cdn.zzko.cnt',
+  'https://cdn.statically.io',
+  'https://vercel.jsd.nmmsl.top',
   // 可以添加更多 CDN
 ];
 
