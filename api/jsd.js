@@ -34,14 +34,15 @@ async function findFastestCDN() {
 
 module.exports = async (req, res) => {
   const { pathname } = new URL(req.url, `http://${req.headers.host}`);
-  
+
   if (pathname.startsWith('/jsd/')) {
     try {
       const fastestCDN = await findFastestCDN();
-      const originalPath = pathname.slice(4); // 移除 '/jsd' 前缀
+      // 将 '/jsd' 替换为 '/gh'，而不是简单地删除
+      const originalPath = pathname.replace('/jsd', '/gh');
 
       const redirectURL = `${fastestCDN}${originalPath}`;
-      
+
       res.statusCode = 302;
       res.setHeader('Location', redirectURL);
       res.end();
