@@ -38,12 +38,7 @@ module.exports = async (req, res) => {
   if (pathname.startsWith('/jsd/')) {
     try {
       const fastestCDN = await findFastestCDN();
-      let originalPath = pathname.slice(4); // 移除 '/jsd' 前缀
-
-      // 检查是否需要添加 '/gh'
-      if (originalPath.startsWith('yanjie233/')) {
-        originalPath = '/gh/' + originalPath;
-      }
+      const originalPath = pathname.slice(4); // 移除 '/jsd' 前缀
 
       const redirectURL = `${fastestCDN}${originalPath}`;
       
