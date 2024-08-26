@@ -6,7 +6,6 @@ const CDN_URLS = [
   'https://jsd.cdn.zzko.cnt',
   'https://cdn.statically.io',
   'https://vercel.jsd.nmmsl.top',
-  'https://jsd.yanjie233.top',
   'https://jsd.nmmsl.top',
 ];
 
