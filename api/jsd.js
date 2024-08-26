@@ -1,13 +1,11 @@
 const https = require('https');
 
-// CDN 列表，您可以在这里手动更新
 const CDN_URLS = [
   'https://cdn.jsdelivr.net',
   'https://cdn.statically.io',
   'https://jsd.cdn.zzko.cnt',
   'https://cdn.statically.io',
   'https://vercel.jsd.nmmsl.top',
-  // 可以添加更多 CDN
 ];
 
 function checkCDN(cdnUrl) {
@@ -16,7 +14,7 @@ function checkCDN(cdnUrl) {
     const testUrl = `${cdnUrl}/npm/jquery@3.6.0/dist/jquery.min.js`;
     
     https.get(testUrl, (res) => {
-      res.resume(); // 消耗响应数据以释放内存
+      res.resume();
       const endTime = Date.now();
       resolve({ url: cdnUrl, responseTime: endTime - startTime });
     }).on('error', () => {
@@ -40,7 +38,13 @@ module.exports = async (req, res) => {
   if (pathname.startsWith('/jsd/')) {
     try {
       const fastestCDN = await findFastestCDN();
-      const originalPath = pathname.slice(4); // 移除 '/jsd' 前缀
+      let originalPath = pathname.slice(4); // 移除 '/jsd' 前缀
+
+      // 检查是否需要添加 '/gh'
+      if (originalPath.startsWith('yanjie233/')) {
+        originalPath = '/gh/' + originalPath;
+      }
+
       const redirectURL = `${fastestCDN}${originalPath}`;
       
       res.statusCode = 302;
