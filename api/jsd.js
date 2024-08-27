@@ -34,13 +34,13 @@ async function findFastestCDN() {
 }
 
 module.exports = async (req, res) => {
-  const { pathname } = new URL(req.url, `http://${req.headers.host}`);
+  const fullUrl = `https://${req.headers.host}${req.url}`;
+  const url = new URL(fullUrl);
 
   try {
     const fastestCDN = await findFastestCDN();
 
-    // 使用完整的原始路径，不再限制于 /jsd
-    const redirectURL = `${fastestCDN}${pathname}`;
+    const redirectURL = `${fastestCDN}${url.pathname}${url.search}`;
 
     res.statusCode = 302;
     res.setHeader('Location', redirectURL);
