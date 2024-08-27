@@ -2,10 +2,11 @@ const https = require('https');
 
 const CDN_URLS = [
   'https://cdn.jsdelivr.net',
-  'https://cdn.statically.io',
+  'https://jsdelivr.b-cdn.net',
+  'https://cdn.jsdmirror.com',
+  'https://cdn.iocdn.cc',
   'https://jsd.cdn.zzko.cnt',
   'https://cdn.statically.io',
-  'https://vercel.jsd.nmmsl.top',
 ];
 
 function checkCDN(cdnUrl) {
