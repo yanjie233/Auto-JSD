@@ -28,7 +28,7 @@ function checkCDN(cdnUrl) {
 
 async function findFastestCDN() {
   const results = await Promise.all(CDN_URLS.map(checkCDN));
-  return results.reduce((fastest, current) => 
+  return results.reduce((fastest, current) =>
     current.responseTime < fastest.responseTime ? current : fastest
   ).url;
 }
@@ -38,8 +38,8 @@ module.exports = async (req, res) => {
 
   try {
     const fastestCDN = await findFastestCDN();
-    
-    // 直接使用完整的原始路径
+
+    // 使用完整的原始路径，不再限制于 /jsd
     const redirectURL = `${fastestCDN}${pathname}`;
 
     res.statusCode = 302;
