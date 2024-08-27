@@ -1,6 +1,6 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/jsd/(.*)", "dest": "/api/jsd.js" }
+    { "src": "/(.*)", "dest": "/api/jsd.js" }
   ]
 }
