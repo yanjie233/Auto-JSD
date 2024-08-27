@@ -6,14 +6,13 @@ const CDN_URLS = [
   'https://jsd.cdn.zzko.cnt',
   'https://cdn.statically.io',
   'https://vercel.jsd.nmmsl.top',
-  'https://jsd.nmmsl.top',
 ];
 
 function checkCDN(cdnUrl) {
   return new Promise((resolve) => {
     const startTime = Date.now();
     const testUrl = `${cdnUrl}/npm/jquery@3.6.0/dist/jquery.min.js`;
-    
+
     https.get(testUrl, (res) => {
       res.resume();
       const endTime = Date.now();
@@ -36,26 +35,19 @@ async function findFastestCDN() {
 module.exports = async (req, res) => {
   const { pathname } = new URL(req.url, `http://${req.headers.host}`);
 
-  if (pathname.startsWith('/jsd/')) {
-    try {
-      const fastestCDN = await findFastestCDN();
-      // 将 '/jsd' 替换为 '/gh'，而不是简单地删除
-      const originalPath = pathname.replace('/jsd', '/gh');
+  try {
+    const fastestCDN = await findFastestCDN();
+    
+    // 直接使用完整的原始路径
+    const redirectURL = `${fastestCDN}${pathname}`;
 
-      const redirectURL = `${fastestCDN}${originalPath}`;
-
-      res.statusCode = 302;
-      res.setHeader('Location', redirectURL);
-      res.end();
-    } catch (error) {
-      console.error('Error finding fastest CDN:', error);
-      res.statusCode = 500;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Error finding a working CDN');
-    }
-  } else {
-    res.statusCode = 404;
+    res.statusCode = 302;
+    res.setHeader('Location', redirectURL);
+    res.end();
+  } catch (error) {
+    console.error('Error finding fastest CDN:', error);
+    res.statusCode = 500;
     res.setHeader('Content-Type', 'text/plain');
-    res.end('Not Found');
+    res.end('Error finding a working CDN');
   }
 };
