@@ -4,7 +4,6 @@ const CDN_URLS = [
   'https://cdn.jsdmirror.com',
   'https://cdn.iocdn.cc',
   'https://jsd.cdn.zzko.cnt',
-  'https://cdn.statically.io',
 ];
 
 function checkCDN(cdnUrl) {
