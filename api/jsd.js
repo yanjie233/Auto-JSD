@@ -1,7 +1,7 @@
 const https = require('https');
 
 const CDN_URLS = [
-  'https://cdn.jsdmirror.com',
+  'https://jsd.nmmsl.top/',
   'https://jsd.cdn.zzko.cnt',
 ];
 
